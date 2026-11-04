@@ -2,839 +2,901 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#07110d">
-  <meta name="description" content="Futebol 90 — notícias, análises e tudo sobre o futebol brasileiro e mundial.">
-  <title>Futebol 90 | O futebol em primeiro lugar</title>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
-  <style>
-    :root {
-      --green: #b8f34b;
-      --green-dark: #173d25;
-      --bg: #07110d;
-      --surface: #101b15;
-      --surface-2: #16231b;
-      --white: #f4f7f3;
-      --muted: #9aa79d;
-      --border: rgba(255,255,255,.09);
-    }
-
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      background: var(--bg);
-      color: var(--white);
-      font-family: 'Inter', sans-serif;
-      line-height: 1.6;
-    }
-
-    a { color: inherit; text-decoration: none; }
-    button { font: inherit; cursor: pointer; }
-
-    .container {
-      width: min(1180px, 92%);
-      margin: auto;
-    }
-
-    /* TOPO */
-
-    .topbar {
-      background: #050b08;
-      border-bottom: 1px solid var(--border);
-      color: var(--muted);
-      font-size: 11px;
-      padding: 9px 0;
-    }
-
-    .topbar .container {
-      display: flex;
-      justify-content: space-between;
-      gap: 12px;
-    }
-
-    header {
-      background: rgba(7,17,13,.96);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      border-bottom: 1px solid var(--border);
-      backdrop-filter: blur(15px);
-    }
-
-    .header-content {
-      min-height: 82px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 25px;
-    }
-
-    .logo {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 36px;
-      font-weight: 900;
-      letter-spacing: -1.5px;
-      white-space: nowrap;
-    }
-
-    .logo span { color: var(--green); }
-
-    nav {
-      display: flex;
-      align-items: center;
-      gap: 27px;
-    }
-
-    nav a {
-      color: #c3cec5;
-      font-size: 12px;
-      font-weight: 700;
-      transition: .2s;
-    }
-
-    nav a:hover { color: var(--green); }
-
-    .header-button {
-      background: var(--green);
-      color: #10190d;
-      border: none;
-      padding: 11px 17px;
-      border-radius: 4px;
-      font-size: 11px;
-      font-weight: 800;
-      white-space: nowrap;
-    }
-
-    .menu-toggle {
-      display: none;
-      background: transparent;
-      color: white;
-      border: 1px solid var(--border);
-      padding: 8px 12px;
-      border-radius: 4px;
-    }
-
-    /* DESTAQUE */
-
-    .hero {
-      padding: 48px 0 35px;
-    }
-
-    .section-label {
-      color: var(--green);
-      font-size: 11px;
-      font-weight: 800;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 18px;
-    }
-
-    .section-label::before {
-      content: "";
-      width: 24px;
-      height: 2px;
-      background: var(--green);
-    }
-
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1.65fr 1fr;
-      gap: 18px;
-    }
-
-    .hero-main {
-      min-height: 440px;
-      border-radius: 7px;
-      overflow: hidden;
-      position: relative;
-      background:
-        linear-gradient(0deg, rgba(0,0,0,.92), rgba(0,0,0,.03) 85%),
-        url('https://images.unsplash.com/photo-1522778119026-d647f0596c20?auto=format&fit=crop&w=1400&q=85') center/cover;
-      display: flex;
-      align-items: flex-end;
-      padding: 35px;
-    }
-
-    .hero-main-content { max-width: 650px; }
-
-    .tag {
-      display: inline-block;
-      background: var(--green);
-      color: #0b160c;
-      font-size: 10px;
-      font-weight: 900;
-      padding: 5px 9px;
-      text-transform: uppercase;
-      letter-spacing: .8px;
-      border-radius: 2px;
-      margin-bottom: 13px;
-    }
-
-    .hero-main h1 {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: clamp(37px, 5vw, 62px);
-      line-height: .99;
-      text-transform: uppercase;
-      font-weight: 800;
-      margin-bottom: 15px;
-    }
-
-    .hero-main p {
-      color: #d0d6d1;
-      font-size: 13px;
-      max-width: 510px;
-      margin-bottom: 18px;
-    }
-
-    .meta {
-      color: #aab5ac;
-      font-size: 10px;
-      font-weight: 600;
-    }
-
-    .hero-side {
-      display: grid;
-      grid-template-rows: 1fr 1fr;
-      gap: 18px;
-    }
-
-    .side-card {
-      min-height: 210px;
-      position: relative;
-      overflow: hidden;
-      border-radius: 7px;
-      display: flex;
-      align-items: flex-end;
-      padding: 23px;
-      background-size: cover;
-      background-position: center;
-    }
-
-    .side-card::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(0deg, rgba(0,0,0,.95), rgba(0,0,0,.05));
-    }
-
-    .side-card > div { position: relative; z-index: 1; }
-
-    .side-card h2 {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 29px;
-      line-height: 1.05;
-      text-transform: uppercase;
-      margin-bottom: 8px;
-    }
-
-    .side-one {
-      background-image: url('https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=800&q=80');
-    }
-
-    .side-two {
-      background-image: url('https://images.unsplash.com/photo-1517466787929-bc90951d0974?auto=format&fit=crop&w=800&q=80');
-    }
-
-    /* FAIXA */
-
-    .ticker {
-      background: var(--green);
-      color: #10180c;
-      overflow: hidden;
-      padding: 11px 0;
-      margin: 15px 0 45px;
-    }
-
-    .ticker-content {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 30px;
-      font-size: 10px;
-      font-weight: 900;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-
-    /* CONTEÚDO */
-
-    .content-section { padding: 15px 0 65px; }
-
-    .section-heading {
-      display: flex;
-      justify-content: space-between;
-      align-items: end;
-      gap: 20px;
-      margin-bottom: 25px;
-    }
-
-    .section-heading h2 {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 43px;
-      line-height: 1;
-      text-transform: uppercase;
-    }
-
-    .section-heading p {
-      color: var(--muted);
-      font-size: 11px;
-    }
-
-    .filters {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      margin-bottom: 24px;
-    }
-
-    .filter-btn {
-      padding: 9px 15px;
-      border: 1px solid var(--border);
-      background: var(--surface);
-      color: var(--muted);
-      border-radius: 3px;
-      font-size: 10px;
-      font-weight: 800;
-      text-transform: uppercase;
-    }
-
-    .filter-btn.active,
-    .filter-btn:hover {
-      background: var(--green);
-      color: #10180c;
-      border-color: var(--green);
-    }
-
-    .news-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-    }
-
-    .news-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 5px;
-      overflow: hidden;
-      transition: transform .25s, border-color .25s;
-    }
-
-    .news-card:hover {
-      transform: translateY(-5px);
-      border-color: rgba(184,243,75,.45);
-    }
-
-    .news-image {
-      height: 205px;
-      background-size: cover;
-      background-position: center;
-      position: relative;
-    }
-
-    .news-image .tag {
-      position: absolute;
-      left: 15px;
-      bottom: 13px;
-      margin: 0;
-    }
-
-    .news-body { padding: 20px; }
-
-    .news-body h3 {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 25px;
-      line-height: 1.08;
-      margin: 10px 0;
-      text-transform: uppercase;
-    }
-
-    .news-body p {
-      color: var(--muted);
-      font-size: 11px;
-      margin-bottom: 15px;
-    }
-
-    .read-more {
-      color: var(--green);
-      font-size: 10px;
-      font-weight: 900;
-      text-transform: uppercase;
-      letter-spacing: .6px;
-    }
-
-    .no-results {
-      display: none;
-      color: var(--muted);
-      padding: 30px 0;
-      font-size: 13px;
-    }
-
-    /* ANÁLISE */
-
-    .analysis {
-      background: var(--surface);
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-      padding: 65px 0;
-    }
-
-    .analysis-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 45px;
-      align-items: center;
-    }
-
-    .analysis-image {
-      min-height: 330px;
-      border-radius: 5px;
-      background:
-        linear-gradient(0deg, rgba(0,0,0,.15), rgba(0,0,0,.05)),
-        url('https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?auto=format&fit=crop&w=1100&q=85') center/cover;
-    }
-
-    .analysis-text h2 {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 48px;
-      line-height: 1;
-      text-transform: uppercase;
-      margin-bottom: 18px;
-    }
-
-    .analysis-text p {
-      color: var(--muted);
-      font-size: 13px;
-      margin-bottom: 20px;
-    }
-
-    .outline-button {
-      display: inline-block;
-      border: 1px solid var(--green);
-      color: var(--green);
-      padding: 11px 18px;
-      border-radius: 3px;
-      font-size: 10px;
-      font-weight: 900;
-      text-transform: uppercase;
-    }
-
-    .outline-button:hover {
-      background: var(--green);
-      color: var(--bg);
-    }
-
-    /* SOBRE */
-
-    .about {
-      padding: 65px 0;
-      text-align: center;
-    }
-
-    .about h2 {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 45px;
-      text-transform: uppercase;
-      margin-bottom: 12px;
-    }
-
-    .about p {
-      color: var(--muted);
-      max-width: 650px;
-      margin: auto;
-      font-size: 13px;
-    }
-
-    /* RODAPÉ */
-
-    footer {
-      background: #040906;
-      border-top: 1px solid var(--border);
-      padding: 35px 0;
-    }
-
-    .footer-content {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 20px;
-    }
-
-    .footer-text {
-      color: var(--muted);
-      font-size: 10px;
-    }
-
-    .footer-links {
-      display: flex;
-      gap: 18px;
-      flex-wrap: wrap;
-    }
-
-    .footer-links a {
-      color: var(--muted);
-      font-size: 10px;
-    }
-
-    .footer-links a:hover { color: var(--green); }
-
-    /* RESPONSIVO */
-
-    @media (max-width: 850px) {
-      .header-content { min-height: 70px; }
-
-      .menu-toggle { display: block; }
-
-      nav {
-        display: none;
-        position: absolute;
-        top: 70px;
-        left: 0;
-        width: 100%;
-        background: #08120c;
-        padding: 20px 4%;
-        border-bottom: 1px solid var(--border);
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 20px;
-      }
-
-      nav.open { display: flex; }
-
-      .header-button { display: none; }
-
-      .hero-grid { grid-template-columns: 1fr; }
-
-      .hero-main { min-height: 390px; }
-
-      .hero-side { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
-
-      .side-card { min-height: 190px; }
-
-      .news-grid { grid-template-columns: repeat(2, 1fr); }
-    }
-
-    @media (max-width: 560px) {
-      .topbar .container { justify-content: center; }
-
-      .topbar .container span:last-child { display: none; }
-
-      .logo { font-size: 31px; }
-
-      .hero { padding-top: 30px; }
-
-      .hero-main {
-        min-height: 390px;
-        padding: 23px;
-      }
-
-      .hero-main h1 { font-size: 43px; }
-
-      .hero-side { grid-template-columns: 1fr; }
-
-      .side-card { min-height: 180px; }
-
-      .ticker-content { gap: 12px 20px; }
-
-      .section-heading {
-        align-items: flex-start;
-        flex-direction: column;
-      }
-
-      .section-heading h2 { font-size: 38px; }
-
-      .news-grid { grid-template-columns: 1fr; }
-
-      .news-image { height: 220px; }
-
-      .analysis-grid { grid-template-columns: 1fr; gap: 25px; }
-
-      .analysis-image { min-height: 230px; }
-
-      .analysis-text h2 { font-size: 40px; }
-
-      .about h2 { font-size: 38px; }
-
-      .footer-content {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#07130d">
+<meta name="description" content="Futebol 90: notícias, resultados e cobertura dos maiores campeonatos do futebol mundial.">
+<title>Futebol 90 | O mundo da bola</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg: #07130d;
+  --surface: #0d1e14;
+  --surface2: #13291c;
+  --green: #20d477;
+  --white: #f5f8f5;
+  --muted: #9aaca0;
+  --line: #243b2c;
+  --max: 1200px;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--white);
+  font-family: "DM Sans", sans-serif;
+}
+
+a { color: inherit; text-decoration: none; }
+
+button { font: inherit; cursor: pointer; }
+
+.container {
+  width: min(var(--max), calc(100% - 40px));
+  margin: auto;
+}
+
+.topbar {
+  background: #030906;
+  border-bottom: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 11px;
+  padding: 10px 0;
+}
+
+.topbar .container {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: rgba(7,19,13,.96);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--line);
+}
+
+.nav {
+  min-height: 78px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 25px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: "Barlow Condensed", sans-serif;
+  font-weight: 900;
+  font-size: 29px;
+  white-space: nowrap;
+}
+
+.brand-icon {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border-radius: 10px;
+  background: var(--green);
+  color: #06140b;
+  font-size: 25px;
+}
+
+.brand span:last-child { color: var(--green); }
+
+nav {
+  display: flex;
+  align-items: center;
+  gap: 23px;
+}
+
+nav a {
+  color: #c4d0c7;
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+}
+
+nav a:hover { color: var(--green); }
+
+.menu-button {
+  display: none;
+  background: var(--surface);
+  color: white;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 9px 12px;
+  font-size: 18px;
+}
+
+.ticker {
+  background: #0b1b11;
+  border-bottom: 1px solid var(--line);
+  padding: 12px 0;
+  font-size: 11px;
+  color: #c3d0c7;
+}
+
+.ticker strong {
+  color: var(--green);
+  margin-right: 12px;
+}
+
+.section {
+  padding: 38px 0;
+  border-bottom: 1px solid #192a1e;
+}
+
+.eyebrow {
+  color: var(--green);
+  text-transform: uppercase;
+  letter-spacing: .14em;
+  font-size: 10px;
+  font-weight: 900;
+}
+
+.section-title {
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: 36px;
+  line-height: 1;
+  text-transform: uppercase;
+  margin: 9px 0 22px;
+}
+
+.hero {
+  padding-top: 35px;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  gap: 17px;
+  margin-top: 18px;
+}
+
+.hero-main {
+  min-height: 440px;
+  border-radius: 15px;
+  overflow: hidden;
+  position: relative;
+  background:
+    linear-gradient(0deg,rgba(2,10,5,.98),rgba(2,10,5,.05)),
+    url("https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&w=1400&q=85") center/cover;
+}
+
+.hero-content {
+  position: absolute;
+  bottom: 30px;
+  left: 30px;
+  right: 30px;
+}
+
+.tag {
+  display: inline-block;
+  background: var(--green);
+  color: #04130a;
+  padding: 7px 10px;
+  border-radius: 4px;
+  font-size: 9px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.hero h1 {
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: clamp(40px, 5vw, 65px);
+  line-height: .98;
+  text-transform: uppercase;
+  max-width: 700px;
+  margin: 15px 0;
+}
+
+.hero p {
+  max-width: 560px;
+  color: #d0d9d2;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.hero-side {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  gap: 17px;
+}
+
+.hero-small {
+  min-height: 205px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 13px;
+  background:
+    linear-gradient(0deg,rgba(2,10,5,.97),transparent),
+    url("https://images.unsplash.com/photo-1522778119026-d647f0596c20?auto=format&fit=crop&w=900&q=80") center/cover;
+}
+
+.hero-small:nth-child(2) {
+  background-image:
+    linear-gradient(0deg,rgba(2,10,5,.97),transparent),
+    url("https://images.unsplash.com/photo-1521412644187-c49fa049e84d?auto=format&fit=crop&w=900&q=80");
+}
+
+.small-content {
+  position: absolute;
+  bottom: 19px;
+  left: 19px;
+  right: 15px;
+}
+
+.small-content h2 {
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: 26px;
+  line-height: 1;
+  text-transform: uppercase;
+  margin: 9px 0 0;
+}
+
+.disclaimer {
+  color: #829387;
+  font-size: 10px;
+  line-height: 1.6;
+  margin-top: 15px;
+}
+
+/* CAMPEONATOS */
+
+.leagues {
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  gap: 12px;
+}
+
+.league {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 11px;
+  padding: 20px 15px;
+  transition: .2s;
+}
+
+.league:hover {
+  border-color: var(--green);
+  transform: translateY(-3px);
+}
+
+.league-code {
+  color: var(--green);
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: 28px;
+  font-weight: 900;
+}
+
+.league h3 {
+  font-size: 13px;
+  margin: 7px 0 4px;
+}
+
+.league p {
+  font-size: 10px;
+  color: var(--muted);
+  margin: 0;
+}
+
+/* NOTÍCIAS */
+
+.news-grid {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 16px;
+}
+
+.news-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.news-card img {
+  width: 100%;
+  height: 185px;
+  object-fit: cover;
+  display: block;
+}
+
+.news-content { padding: 17px; }
+
+.news-category {
+  color: var(--green);
+  font-size: 9px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+}
+
+.news-card h3 {
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: 24px;
+  line-height: 1.05;
+  text-transform: uppercase;
+  margin: 9px 0;
+}
+
+.news-card p {
+  font-size: 11px;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+/* PLACARES */
+
+.score-grid {
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  gap: 12px;
+}
+
+.score-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 11px;
+  padding: 17px;
+}
+
+.competition {
+  font-size: 10px;
+  font-weight: 800;
+  color: var(--green);
+  text-transform: uppercase;
+}
+
+.match {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.team {
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.score {
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: 26px;
+  font-weight: 900;
+}
+
+.placeholder {
+  font-size: 10px;
+  color: var(--muted);
+  margin-top: 14px;
+}
+
+/* CLASSIFICAÇÃO E AGENDA */
+
+.two-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.panel {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.panel h3 {
+  font-family: "Barlow Condensed", sans-serif;
+  text-transform: uppercase;
+  font-size: 25px;
+  margin: 0 0 15px;
+}
+
+.table-line {
+  display: grid;
+  grid-template-columns: 25px 1fr 35px 40px;
+  gap: 8px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 11px;
+}
+
+.table-line:last-child { border: 0; }
+
+.table-line.header {
+  color: var(--muted);
+  font-size: 9px;
+  font-weight: 800;
+}
+
+.agenda-item {
+  padding: 14px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.agenda-item:last-child { border: 0; }
+
+.agenda-item strong {
+  display: block;
+  font-size: 12px;
+}
+
+.agenda-item span {
+  display: block;
+  color: var(--muted);
+  font-size: 10px;
+  margin-top: 5px;
+}
+
+/* RODAPÉ */
+
+footer {
+  background: #030906;
+  padding: 35px 0;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.footer-text {
+  color: var(--muted);
+  font-size: 10px;
+  line-height: 1.7;
+}
+
+/* CELULAR */
+
+@media(max-width:850px) {
+  nav { gap: 12px; }
+  nav a { font-size: 9px; }
+  .hero-grid { grid-template-columns: 1.2fr 1fr; }
+  .news-grid { grid-template-columns: repeat(2,1fr); }
+}
+
+@media(max-width:650px) {
+  .container { width: calc(100% - 28px); }
+
+  .nav { min-height: 68px; }
+
+  .menu-button { display: block; }
+
+  nav {
+    display: none;
+    position: absolute;
+    top: 68px;
+    left: 0;
+    right: 0;
+    padding: 20px;
+    background: #09170e;
+    border-bottom: 1px solid var(--line);
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  nav.open { display: flex; }
+
+  nav a { font-size: 12px; }
+
+  .hero-grid { grid-template-columns: 1fr; }
+
+  .hero-main { min-height: 370px; }
+
+  .hero-content { left: 20px; right: 20px; bottom: 20px; }
+
+  .hero h1 { font-size: 43px; }
+
+  .hero-side {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 180px;
+  }
+
+  .hero-small { min-height: 180px; }
+
+  .small-content { left: 12px; bottom: 13px; }
+
+  .small-content h2 { font-size: 20px; }
+
+  .leagues { grid-template-columns: repeat(2,1fr); }
+
+  .news-grid { grid-template-columns: 1fr; }
+
+  .news-card img { height: 200px; }
+
+  .score-grid { grid-template-columns: 1fr; }
+
+  .two-columns { grid-template-columns: 1fr; }
+
+  .footer-content {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .section-title { font-size: 31px; }
+}
+</style>
 </head>
 
 <body>
 
-  <div class="topbar">
+<div class="topbar">
+  <div class="container">
+    <span>FUTEBOL BRASILEIRO E INTERNACIONAL</span>
+    <span id="currentDate"></span>
+  </div>
+</div>
+
+<header>
+  <div class="container nav">
+    <a href="#" class="brand">
+      <span class="brand-icon">90</span>
+      FUTEBOL<span>90</span>
+    </a>
+
+    <nav id="navigation">
+      <a href="#inicio">Início</a>
+      <a href="#noticias">Notícias</a>
+      <a href="#campeonatos">Campeonatos</a>
+      <a href="#resultados">Resultados</a>
+      <a href="#classificacao">Classificação</a>
+      <a href="#agenda">Agenda</a>
+    </nav>
+
+    <button class="menu-button" id="menuButton" aria-label="Abrir menu">☰</button>
+  </div>
+</header>
+
+<div class="ticker">
+  <div class="container">
+    <strong>GIRO 90</strong>
+    Notícias, análises e informações dos principais campeonatos do mundo.
+  </div>
+</div>
+
+<main id="inicio">
+
+  <section class="container hero">
+    <div class="eyebrow">O mundo da bola em um só lugar</div>
+
+    <div class="hero-grid">
+      <article class="hero-main">
+        <div class="hero-content">
+          <span class="tag">Futebol 90</span>
+          <h1>O futebol não para. E a gente também não.</h1>
+          <p>
+            Do Brasileirão à Champions League:
+            acompanhe os principais acontecimentos,
+            histórias e competições do futebol mundial.
+          </p>
+        </div>
+      </article>
+
+      <div class="hero-side">
+        <article class="hero-small">
+          <div class="small-content">
+            <span class="tag">América do Sul</span>
+            <h2>O caminho até a glória continental</h2>
+          </div>
+        </article>
+
+        <article class="hero-small">
+          <div class="small-content">
+            <span class="tag">Europa</span>
+            <h2>Os gigantes do futebol europeu</h2>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="campeonatos">
     <div class="container">
-      <span>FUTEBOL 90 — O FUTEBOL EM PRIMEIRO LUGAR</span>
-      <span id="current-date"></span>
+      <div class="eyebrow">Cobertura internacional</div>
+      <h2 class="section-title">Grandes campeonatos</h2>
+
+      <div class="leagues">
+        <a class="league" href="#noticias">
+          <div class="league-code">BR</div>
+          <h3>Brasileirão</h3>
+          <p>Séries A e B</p>
+        </a>
+
+        <a class="league" href="#noticias">
+          <div class="league-code">LIB</div>
+          <h3>Libertadores</h3>
+          <p>América do Sul</p>
+        </a>
+
+        <a class="league" href="#noticias">
+          <div class="league-code">UCL</div>
+          <h3>Champions League</h3>
+          <p>Europa</p>
+        </a>
+
+        <a class="league" href="#noticias">
+          <div class="league-code">PL</div>
+          <h3>Premier League</h3>
+          <p>Inglaterra</p>
+        </a>
+
+        <a class="league" href="#noticias">
+          <div class="league-code">LL</div>
+          <h3>La Liga</h3>
+          <p>Espanha</p>
+        </a>
+
+        <a class="league" href="#noticias">
+          <div class="league-code">SA</div>
+          <h3>Serie A</h3>
+          <p>Itália</p>
+        </a>
+
+        <a class="league" href="#noticias">
+          <div class="league-code">BL</div>
+          <h3>Bundesliga</h3>
+          <p>Alemanha</p>
+        </a>
+
+        <a class="league" href="#noticias">
+          <div class="league-code">L1</div>
+          <h3>Ligue 1</h3>
+          <p>França</p>
+        </a>
+
+        <a class="league" href="#noticias">
+          <div class="league-code">CDB</div>
+          <h3>Copa do Brasil</h3>
+          <p>Brasil</p>
+        </a>
+
+        <a class="league" href="#noticias">
+          <div class="league-code">SUL</div>
+          <h3>Sul-Americana</h3>
+          <p>América do Sul</p>
+        </a>
+
+        <a class="league" href="#noticias">
+          <div class="league-code">MLS</div>
+          <h3>MLS</h3>
+          <p>Estados Unidos</p>
+        </a>
+
+        <a class="league" href="#noticias">
+          <div class="league-code">WC</div>
+          <h3>Seleções</h3>
+          <p>Futebol mundial</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="noticias">
+    <div class="container">
+      <div class="eyebrow">Informação e análise</div>
+      <h2 class="section-title">Central de notícias</h2>
+
+      <div class="news-grid">
+        <article class="news-card">
+          <img src="https://images.unsplash.com/photo-1522778119026-d647f0596c20?auto=format&fit=crop&w=900&q=80" alt="Estádio de futebol">
+          <div class="news-content">
+            <div class="news-category">Brasil • Brasileirão</div>
+            <h3>A disputa pelo topo do futebol brasileiro</h3>
+            <p>Espaço reservado para notícias, análises e informações da Série A e Série B.</p>
+          </div>
+        </article>
+
+        <article class="news-card">
+          <img src="https://images.unsplash.com/photo-1521412644187-c49fa049e84d?auto=format&fit=crop&w=900&q=80" alt="Partida de futebol">
+          <div class="news-content">
+            <div class="news-category">Europa • Champions League</div>
+            <h3>Os grandes confrontos do futebol europeu</h3>
+            <p>Acompanhe os clubes, jogadores e histórias da principal competição europeia.</p>
+          </div>
+        </article>
+
+        <article class="news-card">
+          <img src="https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&w=900&q=80" alt="Campo de futebol">
+          <div class="news-content">
+            <div class="news-category">América do Sul • Libertadores</div>
+            <h3>A paixão que movimenta o continente</h3>
+            <p>Notícias e análises dos clubes que disputam a glória continental.</p>
+          </div>
+        </article>
+
+        <article class="news-card">
+          <img src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=900&q=80" alt="Gramado de futebol">
+          <div class="news-content">
+            <div class="news-category">Inglaterra • Premier League</div>
+            <h3>O espetáculo do futebol inglês</h3>
+            <p>Um espaço dedicado aos principais acontecimentos da liga inglesa.</p>
+          </div>
+        </article>
+
+        <article class="news-card">
+          <img src="https://images.unsplash.com/photo-1518604666860-9ed391f76460?auto=format&fit=crop&w=900&q=80" alt="Estádio iluminado">
+          <div class="news-content">
+            <div class="news-category">Espanha • La Liga</div>
+            <h3>Os gigantes e as novas forças da Espanha</h3>
+            <p>Acompanhe a temporada, os clubes e os protagonistas do campeonato espanhol.</p>
+          </div>
+        </article>
+
+        <article class="news-card">
+          <img src="https://images.unsplash.com/photo-1529900748604-07564a03e7a6?auto=format&fit=crop&w=900&q=80" alt="Bola de futebol">
+          <div class="news-content">
+            <div class="news-category">Mundo • Seleções</div>
+            <h3>O futebol muito além dos clubes</h3>
+            <p>Notícias sobre seleções, torneios internacionais e futebol pelo mundo.</p>
+          </div>
+        </article>
+      </div>
+
+      <p class="disclaimer">
+        Esta versão inicial apresenta áreas demonstrativas. As notícias reais
+        serão adicionadas quando conectarmos uma fonte de conteúdo.
+      </p>
+    </div>
+  </section>
+
+  <section class="section" id="resultados">
+    <div class="container">
+      <div class="eyebrow">Acompanhe as partidas</div>
+      <h2 class="section-title">Resultados e placares</h2>
+
+      <div class="score-grid">
+        <div class="score-card">
+          <div class="competition">Brasileirão • Série A</div>
+          <div class="match">
+            <span class="team">Time mandante</span>
+            <strong class="score">— × —</strong>
+            <span class="team">Time visitante</span>
+          </div>
+          <div class="placeholder">Aguardando integração de resultados.</div>
+        </div>
+
+        <div class="score-card">
+          <div class="competition">Champions League</div>
+          <div class="match">
+            <span class="team">Time mandante</span>
+            <strong class="score">— × —</strong>
+            <span class="team">Time visitante</span>
+          </div>
+          <div class="placeholder">Aguardando integração de resultados.</div>
+        </div>
+
+        <div class="score-card">
+          <div class="competition">Premier League</div>
+          <div class="match">
+            <span class="team">Time mandante</span>
+            <strong class="score">— × —</strong>
+            <span class="team">Time visitante</span>
+          </div>
+          <div class="placeholder">Aguardando integração de resultados.</div>
+        </div>
+
+        <div class="score-card">
+          <div class="competition">Libertadores</div>
+          <div class="match">
+            <span class="team">Time mandante</span>
+            <strong class="score">— × —</strong>
+            <span class="team">Time visitante</span>
+          </div>
+          <div class="placeholder">Aguardando integração de resultados.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container two-columns">
+      <div class="panel" id="classificacao">
+        <div class="eyebrow">Campeonato nacional</div>
+        <h3>Classificação</h3>
+
+        <div class="table-line header">
+          <span>#</span><span>CLUBE</span><span>J</span><span>PTS</span>
+        </div>
+
+        <div class="table-line">
+          <span>—</span><span>Aguardando dados</span><span>—</span><span>—</span>
+        </div>
+
+        <p class="disclaimer">Tabela será preenchida com dados atualizados.</p>
+      </div>
+
+      <div class="panel" id="agenda">
+        <div class="eyebrow">Próximas partidas</div>
+        <h3>Agenda de jogos</h3>
+
+        <div class="agenda-item">
+          <strong>Brasileirão</strong>
+          <span>Próximos jogos serão exibidos aqui.</span>
+        </div>
+
+        <div class="agenda-item">
+          <strong>Champions League</strong>
+          <span>Programação será exibida aqui.</span>
+        </div>
+
+        <div class="agenda-item">
+          <strong>Premier League</strong>
+          <span>Programação será exibida aqui.</span>
+        </div>
+
+        <div class="agenda-item">
+          <strong>Libertadores</strong>
+          <span>Programação será exibida aqui.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container footer-content">
+    <a href="#" class="brand">
+      <span class="brand-icon">90</span>
+      FUTEBOL<span>90</span>
+    </a>
+
+    <div class="footer-text">
+      © <span id="year"></span> Futebol 90.<br>
+      Informação e paixão pelo futebol brasileiro e mundial.
     </div>
   </div>
+</footer>
 
-  <header>
-    <div class="container header-content">
-      <a href="#" class="logo">FUTEBOL<span>90</span></a>
+<script>
+const menuButton = document.getElementById("menuButton");
+const navigation = document.getElementById("navigation");
 
-      <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menu" aria-expanded="false">
-        ☰
-      </button>
+menuButton.addEventListener("click", () => {
+  navigation.classList.toggle("open");
+  menuButton.textContent =
+    navigation.classList.contains("open") ? "×" : "☰";
+});
 
-      <nav id="navigation">
-        <a href="#inicio">INÍCIO</a>
-        <a href="#noticias">NOTÍCIAS</a>
-        <a href="#brasil">BRASIL</a>
-        <a href="#mundo">MUNDO</a>
-        <a href="#analises">ANÁLISES</a>
-        <a href="#sobre">SOBRE</a>
-      </nav>
+navigation.querySelectorAll("a").forEach(link => {
+  link.addEventListener("click", () => {
+    navigation.classList.remove("open");
+    menuButton.textContent = "☰";
+  });
+});
 
-      <a href="#noticias" class="header-button">ACOMPANHE O FUTEBOL</a>
-    </div>
-  </header>
+document.getElementById("currentDate").textContent =
+  new Date().toLocaleDateString("pt-BR", {
+    weekday: "long",
+    day: "2-digit",
+    month: "long",
+    year: "numeric"
+  });
 
-  <main>
-    <section class="hero container" id="inicio">
-      <div class="section-label">DENTRO DE CAMPO</div>
-
-      <div class="hero-grid">
-        <article class="hero-main">
-          <div class="hero-main-content">
-            <span class="tag">DESTAQUE</span>
-            <h1>O futebol não para. E a gente também não.</h1>
-            <p>As histórias, os personagens e os acontecimentos que movimentam o esporte mais apaixonante do mundo.</p>
-            <span class="meta">FUTEBOL 90 · REDAÇÃO</span>
-          </div>
-        </article>
-
-        <div class="hero-side">
-          <article class="side-card side-one">
-            <div>
-              <span class="tag">BRASIL</span>
-              <h2>A paixão pelo futebol brasileiro</h2>
-              <span class="meta">FUTEBOL 90</span>
-            </div>
-          </article>
-
-          <article class="side-card side-two">
-            <div>
-              <span class="tag">MUNDO</span>
-              <h2>O espetáculo do futebol mundial</h2>
-              <span class="meta">FUTEBOL 90</span>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <div class="ticker">
-      <div class="container ticker-content">
-        <span>⚽ FUTEBOL BRASILEIRO</span>
-        <span>◆ FUTEBOL INTERNACIONAL</span>
-        <span>⚽ ANÁLISES</span>
-        <span>◆ OPINIÃO</span>
-      </div>
-    </div>
-
-    <section class="content-section container" id="noticias">
-      <div class="section-heading">
-        <div>
-          <div class="section-label">FIQUE POR DENTRO</div>
-          <h2>Últimas do futebol</h2>
-        </div>
-        <p>INFORMAÇÃO E PAIXÃO PELO JOGO.</p>
-      </div>
-
-      <div class="filters">
-        <button class="filter-btn active" data-filter="todos">TODAS</button>
-        <button class="filter-btn" data-filter="brasil">BRASIL</button>
-        <button class="filter-btn" data-filter="mundo">MUNDO</button>
-        <button class="filter-btn" data-filter="analises">ANÁLISES</button>
-        <button class="filter-btn" data-filter="opiniao">OPINIÃO</button>
-      </div>
-
-      <div class="news-grid" id="news-grid">
-
-        <article class="news-card" data-category="brasil" id="brasil">
-          <div class="news-image" style="background-image:url('https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=900&q=80')">
-            <span class="tag">BRASIL</span>
-          </div>
-          <div class="news-body">
-            <span class="meta">FUTEBOL NACIONAL</span>
-            <h3>A força e a tradição do futebol brasileiro</h3>
-            <p>Uma visão sobre a identidade, a história e a paixão que fazem do futebol brasileiro algo único.</p>
-            <a href="#sobre" class="read-more">CONHEÇA O PORTAL →</a>
-          </div>
-        </article>
-
-        <article class="news-card" data-category="mundo" id="mundo">
-          <div class="news-image" style="background-image:url('https://images.unsplash.com/photo-1517466787929-bc90951d0974?auto=format&fit=crop&w=900&q=80')">
-            <span class="tag">MUNDO</span>
-          </div>
-          <div class="news-body">
-            <span class="meta">FUTEBOL INTERNACIONAL</span>
-            <h3>O futebol que conquista o planeta</h3>
-            <p>Clubes históricos, grandes competições e jogadores que marcaram gerações.</p>
-            <a href="#analises" class="read-more">SAIBA MAIS →</a>
-          </div>
-        </article>
-
-        <article class="news-card" data-category="analises" id="analises">
-          <div class="news-image" style="background-image:url('https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?auto=format&fit=crop&w=900&q=80')">
-            <span class="tag">ANÁLISES</span>
-          </div>
-          <div class="news-body">
-            <span class="meta">TÁTICA E ESTRATÉGIA</span>
-            <h3>O jogo vai muito além dos 90 minutos</h3>
-            <p>Entenda como estratégia, organização e inteligência podem transformar uma partida.</p>
-            <a href="#sobre" class="read-more">SAIBA MAIS →</a>
-          </div>
-        </article>
-
-        <article class="news-card" data-category="opiniao">
-          <div class="news-image" style="background-image:url('https://images.unsplash.com/photo-1522778119026-d647f0596c20?auto=format&fit=crop&w=900&q=80')">
-            <span class="tag">OPINIÃO</span>
-          </div>
-          <div class="news-body">
-            <span class="meta">PAIXÃO PELO JOGO</span>
-            <h3>Por que o futebol mexe tanto com a gente?</h3>
-            <p>Mais do que um esporte, o futebol representa histórias, memórias e sentimentos.</p>
-            <a href="#sobre" class="read-more">SAIBA MAIS →</a>
-          </div>
-        </article>
-
-        <article class="news-card" data-category="brasil">
-          <div class="news-image" style="background-image:url('https://images.unsplash.com/photo-1521412644187-c49fa049e84d?auto=format&fit=crop&w=900&q=80')">
-            <span class="tag">BRASIL</span>
-          </div>
-          <div class="news-body">
-            <span class="meta">HISTÓRIA DO FUTEBOL</span>
-            <h3>Os momentos que ficaram para a história</h3>
-            <p>Relembre a importância dos grandes momentos que construíram a cultura do futebol.</p>
-            <a href="#sobre" class="read-more">SAIBA MAIS →</a>
-          </div>
-        </article>
-
-        <article class="news-card" data-category="mundo">
-          <div class="news-image" style="background-image:url('https://images.unsplash.com/photo-1508098682722-e99c643e7f0b?auto=format&fit=crop&w=900&q=80')">
-            <span class="tag">MUNDO</span>
-          </div>
-          <div class="news-body">
-            <span class="meta">CULTURA ESPORTIVA</span>
-            <h3>O futebol como linguagem universal</h3>
-            <p>Como o esporte conecta pessoas, países e culturas ao redor do mundo.</p>
-            <a href="#sobre" class="read-more">SAIBA MAIS →</a>
-          </div>
-        </article>
-
-      </div>
-
-      <p class="no-results" id="no-results">Nenhum conteúdo encontrado nesta categoria.</p>
-    </section>
-
-    <section class="analysis">
-      <div class="container analysis-grid">
-        <div class="analysis-image"></div>
-
-        <div class="analysis-text">
-          <div class="section-label">NOSSA VISÃO DO JOGO</div>
-          <h2>Não basta acompanhar. É preciso entender.</h2>
-          <p>O futebol é feito de detalhes. Aqui, queremos ir além do resultado e explorar as ideias, as estratégias e as histórias que fazem cada partida ser especial.</p>
-          <a href="#noticias" class="outline-button">EXPLORAR CONTEÚDOS</a>
-        </div>
-      </div>
-    </section>
-
-    <section class="about container" id="sobre">
-      <div class="section-label" style="justify-content:center">QUEM SOMOS</div>
-      <h2>Isso é Futebol 90.</h2>
-      <p>Um espaço criado por quem ama futebol. Nosso objetivo é reunir informação, histórias, análises e opiniões sobre o esporte mais popular do planeta. Futebol em primeiro lugar, sempre.</p>
-    </section>
-  </main>
-
-  <footer>
-    <div class="container footer-content">
-      <div>
-        <a href="#" class="logo">FUTEBOL<span>90</span></a>
-        <p class="footer-text">© <span id="year"></span> Futebol 90. Todos os direitos reservados.</p>
-      </div>
-
-      <div class="footer-links">
-        <a href="#inicio">INÍCIO</a>
-        <a href="#noticias">NOTÍCIAS</a>
-        <a href="#analises">ANÁLISES</a>
-        <a href="#sobre">SOBRE</a>
-      </div>
-    </div>
-  </footer>
-
-  <script>
-    // Data atual
-    const dateElement = document.getElementById('current-date');
-    const today = new Date();
-
-    dateElement.textContent = today.toLocaleDateString('pt-BR', {
-      day: '2-digit',
-      month: 'long',
-      year: 'numeric'
-    });
-
-    document.getElementById('year').textContent = today.getFullYear();
-
-    // Menu para celular
-    const menuToggle = document.getElementById('menu-toggle');
-    const navigation = document.getElementById('navigation');
-
-    menuToggle.addEventListener('click', () => {
-      const isOpen = navigation.classList.toggle('open');
-      menuToggle.setAttribute('aria-expanded', isOpen);
-      menuToggle.textContent = isOpen ? '✕' : '☰';
-    });
-
-    navigation.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
-        navigation.classList.remove('open');
-        menuToggle.setAttribute('aria-expanded', 'false');
-        menuToggle.textContent = '☰';
-      });
-    });
-
-    // Filtros de notícias
-    const filterButtons = document.querySelectorAll('.filter-btn');
-    const newsCards = document.querySelectorAll('.news-card');
-    const noResults = document.getElementById('no-results');
-
-    filterButtons.forEach(button => {
-      button.addEventListener('click', () => {
-        filterButtons.forEach(item => item.classList.remove('active'));
-        button.classList.add('active');
-
-        const category = button.dataset.filter;
-        let visibleCount = 0;
-
-        newsCards.forEach(card => {
-          const matches = category === 'todos' ||
-                          card.dataset.category === category;
-
-          card.style.display = matches ? 'block' : 'none';
-
-          if (matches) visibleCount++;
-        });
-
-        noResults.style.display = visibleCount ? 'none' : 'block';
-      });
-    });
-  </script>
+document.getElementById("year").textContent =
+  new Date().getFullYear();
+</script>
 
 </body>
 </html>
